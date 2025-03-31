@@ -12,3 +12,37 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"  # Jaeger UI
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    volumes:
+      - ./config/otel/otel-collector-config.yml:/etc/otel/config.yaml
+    command: ["--config=/etc/otel/config.yaml"]
+    ports:
+      - "50001:4317"  # Change this line
+      - "55681:55681"
+    depends_on:
+      - jaeger
+
+  myapp:
+    image: openjdk:17-jdk-slim
+    working_dir: /app
+    volumes:
+      - ./target:/app
+    command:
+      - java
+      - "-javaagent:/app/opentelemetry-javaagent.jar"
+      - "-jar"
+      - "/app/monitoringback-0.0.1-SNAPSHOT.jar"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:50001
+      - OTEL_SERVICE_NAME=my-spring-app
+    depends_on:
+      - otel-collector
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
