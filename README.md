@@ -31,6 +31,7 @@ DisenoCorte2
 ├── docker-compose.yml           # Configuración de Docker Compose para gestionar los contenedores
 ├── pom.xml                      # Archivo de configuración de Maven
 ├── README.md                    # Documentación del proyecto
+├── images                       # Carpeta de imágenes para la documentación
 ├── src
 │   ├── main
 │   │   ├── java
