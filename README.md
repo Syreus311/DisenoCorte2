@@ -24,41 +24,34 @@ La estructura del proyecto sigue el estándar de **Maven** y **Spring Boot**, ta
 
 ```
 DisenoCorte2
-├── .git
-├── .gitattributes
-├── .gitignore
-├── .idea
 ├── .mvn
-|   └── maven-wrapper.properties
+│   └── maven-wrapper.properties # Archivo de configuración de Maven Wrapper
 ├── config
-|   └── prometheus.yml
-├── docker-compose.yml
-├── mvnw
-├── mvnw.cmd
-├── pom.xml
-├── README.md
+│   └── prometheus.yml           # Configuración de Prometheus para la recolección de métricas
+├── docker-compose.yml           # Configuración de Docker Compose para gestionar los contenedores
+├── pom.xml                      # Archivo de configuración de Maven
+├── README.md                    # Documentación del proyecto
 ├── src
 │   ├── main
 │   │   ├── java
 │   │   │   └── com
 │   │   │       └── kjuli
 │   │   │           └── monitoringback
-│   │   │               ├── api
-│   │   │               ├── controller
-│   │   │               ├── dto
-│   │   │               ├── enums
-│   │   │               ├── exception
-│   │   │               ├── mapper
-│   │   │               ├── model
-│   │   │               ├── MonitoringbackApplication.java
-│   │   │               ├── repository
-│   │   │               └── service
+│   │   │               ├── api                              # Lógica de la API
+│   │   │               ├── controller                       # Controladores de las solicitudes HTTP
+│   │   │               ├── dto                              # Objetos de transferencia de datos
+│   │   │               ├── enums                            # Definición de enumeraciones
+│   │   │               ├── exception                        # Manejo de excepciones
+│   │   │               ├── mapper                           # Clases para mapear datos entre entidades y DTOs
+│   │   │               ├── model                            # Clases de modelos para representar datos
+│   │   │               ├── MonitoringbackApplication.java   # Clase principal de la aplicación Spring Boot
+│   │   │               ├── repository                       # Repositorios para interactuar con la base de datos
+│   │   │               └── services                         # Servicios con lógica de negocio
 │   │   └── resources
-|   |       ├── application.properties
-|   |       └── data.sql
+│   │       ├── application.properties   # Configuraciones de la aplicación Spring Boot
+│   │       └── data.sql                 # Script de base de datos
 │   └── test
-|       └── MonitoringbackApplicationTests.java
-└── target
+└── target   # Directorio donde Maven coloca los archivos generados tras la compilación
 ```
 
 ---
