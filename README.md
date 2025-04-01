@@ -125,6 +125,12 @@ Al ejecutar el programa, deberías ver la siguiente salida:
 Seleccione una opción (1-4):
 ```
 
+Al abrir los respectivos localhost, deberían aparecer las siguientes salidas:
+
+![Inicio Prometheus](images/inicioprome.png)
+![Inicio Jaeger](images/iniciojae.png)
+![Inicio Grafana](images/iniciografana.png)
+
 ## Explicación de la Implementación
 - **Prometheus** es una herramienta de monitoreo y recolección de métricas basada en series temporales. En este proyecto, Prometheus se encarga de recolectar métricas del sistema, como el uso de CPU, la memoria, el tráfico de red, entre otros. La configuración en el archivo prometheus.yml define el scraping (recolecta) de métricas de un servicio de Spring Boot a través del endpoint /actuator/prometheus, que expone las métricas de la aplicación. En el archivo docker-compose.yml, se configura el contenedor de Prometheus para que esté disponible en el puerto 9090, permitiendo la recolección de métricas de la aplicación. Además, la dependencia en el archivo pom.xml micrometer-registry-prometheus permite que Spring Boot exponga las métricas en el formato adecuado para que Prometheus las recoja.
 
