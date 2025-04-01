@@ -124,7 +124,7 @@ Al abrir los respectivos localhost, deberían aparecer las siguientes salidas:
 ![Inicio Grafana](images/iniciografana.png)
 
 En Prometheus, puedes ingresar el comando *system_cpu_count* y se imprime en la interfaz el siguiente mensaje:
-system_cpu_count{application="monitoringback", instance="host.docker.internal:8080", job="spring-boot-monitoring-app"}
+*system_cpu_count{application="monitoringback", instance="host.docker.internal:8080", job="spring-boot-monitoring-app"}*
 
 Para el funcionamiento de Grafana:
 1. Se hace login con el usuario de *admin* y la contraseña de *admin*.
@@ -140,7 +140,7 @@ Para el funcionamiento de Grafana:
 ![Grafana](images/grafana.png)
 
 Finalmente, en Jaeger se selecciona el servicio y se oprime el botón "Find Traces". Se obtiene la siguiente salida:
-![Grafana](images/jaejae.png)
+![Jaeger](images/jaejae.png)
 
 ---
 
