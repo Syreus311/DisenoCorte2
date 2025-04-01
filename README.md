@@ -25,13 +25,14 @@ La estructura del proyecto sigue el estándar de **Maven** y **Spring Boot**, ta
 ```
 DisenoCorte2
 ├── .mvn
-│   └── maven-wrapper.properties # Archivo de configuración de Maven Wrapper
+│   └── maven-wrapper.properties  # Archivo de configuración de Maven Wrapper
 ├── config
-│   └── prometheus.yml           # Configuración de Prometheus para la recolección de métricas
-├── docker-compose.yml           # Configuración de Docker Compose para gestionar los contenedores
-├── pom.xml                      # Archivo de configuración de Maven
-├── README.md                    # Documentación del proyecto
-├── images                       # Carpeta de imágenes para la documentación
+|   ├── otel-collector-config.yml # Configuración para usar Jaeger
+│   └── prometheus.yml            # Configuración de Prometheus para la recolección de métricas
+├── docker-compose.yml            # Configuración de Docker Compose para gestionar los contenedores
+├── pom.xml                       # Archivo de configuración de Maven
+├── README.md                     # Documentación del proyecto
+├── images                        # Carpeta de imágenes para la documentación
 ├── src
 │   ├── main
 │   │   ├── java
@@ -112,24 +113,36 @@ http://localhost:3000
 
 ## Ejemplo de Ejecución
 Al ejecutar el programa, deberías ver la siguiente salida:
+![Inicio Ejecución](images/ejecucion.png)
 
-```
-¡Bienvenido al sistema de clonación de vehículos
-=============================================
-              MENÚ PRINCIPAL
-=============================================
-1. Clonar un nuevo vehículo
-2. Ver cuántos vehículos se han clonado y sus características
-3. Comparar memoria entre dos vehículos clonados
-4. Salir
-Seleccione una opción (1-4):
-```
+Al ingresar los comandos establecidos para Docker en el apartado anterior, deberías ver la siguiente salida:
+![Inicio Docker](images/docker.png)
 
-Al abrir los respectivos localhost, deberían aparecer las siguientes salidas:
-
+Al abrir los respectivos localhost, deberían aparecer las siguientes salidas: 
 ![Inicio Prometheus](images/inicioprome.png)
 ![Inicio Jaeger](images/iniciojae.png)
 ![Inicio Grafana](images/iniciografana.png)
+
+En Prometheus, puedes ingresar el comando *system_cpu_count* y se imprime en la interfaz el siguiente mensaje:
+system_cpu_count{application="monitoringback", instance="host.docker.internal:8080", job="spring-boot-monitoring-app"}
+
+Para el funcionamiento de Grafana:
+1. Se hace login con el usuario de *admin* y la contraseña de *admin*.
+2. Se ingresan las nuevas contraseñas de tu elección, pueden continuar siendo *admin*.
+3. Se selecciona añadir "Data Source". Luego, Prometheus.
+4. En "Connection", se pone como Prometheus Server URL: http://prometheus:9090
+5. Se guardan los cambios.
+6. Ir a la sección de "Dashboard".
+7. Descargar como JSON el dashboard del link a continuación: [Descargar Spring Boot 2.1 System Monitor](https://grafana.com/grafana/dashboards/11378-justai-system-monitor/)
+8. De vuelta a Grafana, seleccionar del desplegable de "New" la opción "Importar" y subir el archivo JSON del paso anterior. IMPORTANTE: Escoger a Prometheus como datasource
+9. Visualizar las gráficas y métricas.
+
+![Grafana](images/grafana.png)
+
+Finalmente, en Jaeger se selecciona el servicio y se oprime el botón "Find Traces". Se obtiene la siguiente salida:
+![Grafana](images/jaejae.png)
+
+---
 
 ## Explicación de la Implementación
 - **Prometheus** es una herramienta de monitoreo y recolección de métricas basada en series temporales. En este proyecto, Prometheus se encarga de recolectar métricas del sistema, como el uso de CPU, la memoria, el tráfico de red, entre otros. La configuración en el archivo prometheus.yml define el scraping (recolecta) de métricas de un servicio de Spring Boot a través del endpoint /actuator/prometheus, que expone las métricas de la aplicación. En el archivo docker-compose.yml, se configura el contenedor de Prometheus para que esté disponible en el puerto 9090, permitiendo la recolección de métricas de la aplicación. Además, la dependencia en el archivo pom.xml micrometer-registry-prometheus permite que Spring Boot exponga las métricas en el formato adecuado para que Prometheus las recoja.
