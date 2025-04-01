@@ -113,12 +113,15 @@ http://localhost:3000
 
 ## Ejemplo de Ejecución
 Al ejecutar el programa, deberías ver la siguiente salida:
+
 ![Inicio Ejecución](images/ejecucion.png)
 
 Al ingresar los comandos establecidos para Docker en el apartado anterior, deberías ver la siguiente salida:
+
 ![Inicio Docker](images/docker.png)
 
 Al abrir los respectivos localhost, deberían aparecer las siguientes salidas: 
+
 ![Inicio Prometheus](images/inicioprome.png)
 ![Inicio Jaeger](images/iniciojae.png)
 ![Inicio Grafana](images/iniciografana.png)
@@ -140,6 +143,7 @@ Para el funcionamiento de Grafana:
 ![Grafana](images/grafana.png)
 
 Finalmente, en Jaeger se selecciona el servicio y se oprime el botón "Find Traces". Se obtiene la siguiente salida:
+
 ![Jaeger](images/jaejae.png)
 
 ---
